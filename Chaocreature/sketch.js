@@ -1,64 +1,98 @@
-let spiralSize = 300;
-let zhengfu = 8;
-let angle = 0;
-let hx = 0;
-let hy = 0;
-let bbx=200;
-let bby=200;
+let y = 500;
+let h = 0;
+let x = 0;
 
 function setup() {
-  let cnv = createCanvas(500, 500);
+  let cnv = createCanvas(800, 500);
   cnv.parent("p5-canvas-container");
-  
-  angle = random(0.002,0.1);
-  console.log(angle);
-  frameRate(40);
-  
 }
 
 function draw() {
-  background(220,22,120);
-  drawsin(200,200);
-  hx += 1; hy+=1;
+  backgroun();        
+  fill(0);  
   
-  bbx = mouseX;
-  bby = mouseY;
-  drawbody(bbx,bby);
+  jing();
+  
+  if (keyIsPressed && key == "r"){
+    ak(100,100);
+  }    
+  
+  if (keyIsPressed && key == "t"){
+    zz();
   }
+   
+  fill('green');
+  textSize(20);
+  text("[T]: Look in reflection\n[R]: Change mode",100,470);
+  
+}
 
-function drawsin(hx,hy){
-  push();
-  translate(hx,hy);
-  if (!mouseIsPressed && frameCount<500){
+function backgroun(){
+  background('#99DFFF');
+  fill('#B5FF60');
   noStroke();
-  let sinValue = sin(frameCount*angle);
-  let X = map(sinValue, -1, 1, 250-spiralSize/2, 250+spiralSize/2);
-  let cosValue = cos(frameCount*angle);
-  let Y = map(cosValue, -1, 1, 250-spiralSize/2, 250+spiralSize/2);
+  beginShape();
+  curveVertex(0,400);
+  curveVertex(200,420);
+  curveVertex(400,250);
+  curveVertex(800,300);
+  curveVertex(800,500);
+  curveVertex(0,500);
+  curveVertex(0,400);
+  endShape();
   
-    
-  let Rran = random(100,255);
-  let Gran = random(100,255);
-  let Bran = random(100,255);
-  fill(0,Gran,Bran);
-  circle(X, Y, 10);
-  
-  spiralSize = spiralSize-zhengfu;
-  
-  if(frameCount%80 == 0){
-    zhengfu = -zhengfu
-  }
-  pop();
-
-  
-  // inputAngle++; // increases variable by 1
-}
+  ellipse(150,460,380,200);
 }
 
-function drawbody(bx,by){
+function ak(akx,aky){
   push();
-  translate(bx,by);
-  circle(bx,by,30);
+  frameRate(3);
+  fill("rgba(255,0,0,0.15)");
+  rect(0,0,800,500);
+  fill('rgba(255,0,0,0.59)');
+  let akn1 = 0;
+  let akn2 = 0;
+  let akn3 = 0;
+  let akn4 = 0;
   
+  if (frameCount%2==0){
+    akx = random(100,700);
+    aky = random(100,400);
+    akn1 = random(-100,100);
+    akn2 = random(-100,50);
+    akn3 = random(-100,100);
+    akn4 = random(-100,50);
+  }
+  triangle(akx,aky, akx+akn1,aky+akn2, akx+akn3,aky+akn4);
   pop();
+}
+
+function zz(){
+  push();
+  frameRate(50);
+  let spd = 2;
+  fill("yellow");
+  triangle(400,270, 370,130, 430,130);
+  triangle(400,230, 370,370, 430,370);
+  noFill(); stroke("yellow"); strokeWeight(5);
+  ellipse(400,250,h*2,h);
+  ellipse(400,250,h*4,h*2);
+  ellipse(400,250,h*8,h*4);
+  ellipse(400,250,h*10,h*5);
+  
+  if (h>100){h=0;}
+  h+=spd;
+  pop();
+}
+
+function jing(){
+  fill('rgb(211,175,255)')
+  rect(390,y,20,500); //xy 
+  if (y>1){y-=5;}
+  
+  fill('rgb(175,210,255)');
+  arc(400,250,400,400,1.5*PI,1.5*PI+x);
+  fill('rgb(194,175,255)');
+  arc(400,250,400,400,0.5*PI,0.5*PI+x);
+  if (x<3.15){x+=0.02;}
 }

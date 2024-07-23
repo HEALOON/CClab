@@ -3,9 +3,11 @@ let h = 0;
 let x = 0;
 let d = [];
 let state = 0;
+let yl = 0;
 function setup() {
   let cnv = createCanvas(800, 500);
   cnv.parent("p5-canvas-container");
+  
 }
 
 function draw() {
@@ -21,6 +23,7 @@ function draw() {
   
   if (keyIsPressed && key == "r"){
     ak(100,100);
+    yl=0;
   }    
   
   if (keyIsPressed && key == "t" && mouseX<600 && mouseX > 200 && mouseY>50 && mouseY < 450){
@@ -81,7 +84,7 @@ function zz(){
   push();
   frameRate(50);
   let spd = 2;
-  fill("yellow");
+  fill(255,0+yl,0);
   triangle(mouseX,mouseY, mouseX-30,mouseY-100, mouseX+30,mouseY-100);
   triangle(mouseX,mouseY, mouseX-30,mouseY+100, mouseX+30,mouseY+100);
   noFill(); stroke("yellow"); strokeWeight(5);
@@ -93,6 +96,7 @@ function zz(){
   if (h>100){h=0;}
   h+=spd;
   pop();
+  yl+=2;
 }
 
 function zt(){

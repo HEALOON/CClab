@@ -1,9 +1,8 @@
 let y = 500;
 let h = 0;
 let x = 0;
-
 function setup() {
-  let cnv = createCanvas(800, 500);
+   let cnv = createCanvas(800, 500);
   cnv.parent("p5-canvas-container");
 }
 
@@ -24,6 +23,8 @@ function draw() {
   fill('green');
   textSize(20);
   text("[T]: Look in reflection\n[R]: Change mode",100,470);
+  // triangle(mouseX,100,200,200,300,300
+  // zt();
   
 }
 
@@ -72,8 +73,8 @@ function zz(){
   frameRate(50);
   let spd = 2;
   fill("yellow");
-  triangle(400,270, 370,130, 430,130);
-  triangle(400,230, 370,370, 430,370);
+  triangle(mouseX,mouseY, mouseX-30,mouseY-100, mouseX+30,mouseY-100);
+  triangle(mouseX,mouseY, mouseX-30,mouseY+100, mouseX+30,mouseY+100);
   noFill(); stroke("yellow"); strokeWeight(5);
   ellipse(400,250,h*2,h);
   ellipse(400,250,h*4,h*2);
@@ -82,6 +83,14 @@ function zz(){
   
   if (h>100){h=0;}
   h+=spd;
+  pop();
+}
+
+function zt(){
+  push();
+  translate(mouseX,mouseY);
+  fill(0);
+  triangle(100,100,200,200,300,300);
   pop();
 }
 

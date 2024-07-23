@@ -1,8 +1,10 @@
 let y = 500;
 let h = 0;
 let x = 0;
+let d = [];
+let state = 0;
 function setup() {
-   let cnv = createCanvas(800, 500);
+  let cnv = createCanvas(800, 500);
   cnv.parent("p5-canvas-container");
 }
 
@@ -10,19 +12,26 @@ function draw() {
   backgroun();        
   fill(0);  
   
-  jing();
+  if (keyIsPressed && key == "s"){state=1;}
+  
+  if (state==1){
+  jing();}
+  if (keyIsPressed && key == "n"){state=0;}
+  
   
   if (keyIsPressed && key == "r"){
     ak(100,100);
   }    
   
-  if (keyIsPressed && key == "t"){
+  if (keyIsPressed && key == "t" && mouseX<600 && mouseX > 200 && mouseY>50 && mouseY < 450){
     zz();
+    
   }
    
+  // if (keyIsPressed && key == )
   fill('green');
   textSize(20);
-  text("[T]: Look in reflection\n[R]: Change mode",100,470);
+  text("[T]: Look in reflection\n[R]: Change mode\n[S]:Open mirror\n[N]:Close mirror",60,410);
   // triangle(mouseX,100,200,200,300,300
   // zt();
   
@@ -76,10 +85,10 @@ function zz(){
   triangle(mouseX,mouseY, mouseX-30,mouseY-100, mouseX+30,mouseY-100);
   triangle(mouseX,mouseY, mouseX-30,mouseY+100, mouseX+30,mouseY+100);
   noFill(); stroke("yellow"); strokeWeight(5);
-  ellipse(400,250,h*2,h);
-  ellipse(400,250,h*4,h*2);
-  ellipse(400,250,h*8,h*4);
-  ellipse(400,250,h*10,h*5);
+  ellipse(mouseX,mouseY,h*2,h);
+  ellipse(mouseX,mouseY,h*4,h*2);
+  ellipse(mouseX,mouseY,h*8,h*4);
+  ellipse(mouseX,mouseY,h*10,h*5);
   
   if (h>100){h=0;}
   h+=spd;
@@ -99,9 +108,11 @@ function jing(){
   rect(390,y,20,500); //xy 
   if (y>1){y-=5;}
   
-  fill('rgb(175,210,255)');
+  fill('rgba(175,210,255,0.81)');
   arc(400,250,400,400,1.5*PI,1.5*PI+x);
   fill('rgb(194,175,255)');
   arc(400,250,400,400,0.5*PI,0.5*PI+x);
   if (x<3.15){x+=0.02;}
+  
+  
 }

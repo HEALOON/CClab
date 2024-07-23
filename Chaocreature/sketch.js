@@ -90,7 +90,7 @@ function zz(){
   noFill(); stroke("yellow"); strokeWeight(5);
   ellipse(mouseX,mouseY,h*2,h);
   ellipse(mouseX,mouseY,h*4,h*2);
-  ellipse(mouseX,mouseY,h*8,h*4);
+  ellipse(mouseX,mouseY,h*8,h*4);//ji
   ellipse(mouseX,mouseY,h*10,h*5);
   
   if (h>100){h=0;}

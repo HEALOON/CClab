@@ -2,45 +2,39 @@ let y = 500;
 let h = 0;
 let x = 0;
 let d = [];
-let state = 0;
+let state = 0; //1=openmirror 0=closemirror
 let yl = 0;
 function setup() {
-  let cnv = createCanvas(800, 500);
+   let cnv = createCanvas(800, 500);
   cnv.parent("p5-canvas-container");
-  
 }
 
 function draw() {
-  backgroun();        
-  fill(0);  
+  backgroun();   frameRate(40);     
+  fill(0);      //黑
   
   if (keyIsPressed && key == "s"){state=1;}
   
-  if (state==1){
-  jing();}
-  if (keyIsPressed && key == "n"){state=0;}
+  if (state==1){jing();}
   
+  if (keyIsPressed && key == "n"){state=0;}
   
   if (keyIsPressed && key == "r"){
     ak(100,100);
     yl=0;
   }    
   
-  if (keyIsPressed && key == "t" && mouseX<600 && mouseX > 200 && mouseY>50 && mouseY < 450){
-    zz();
-    
+  if (keyIsPressed && key == "t" && state == 1 &&
+      mouseX<600 && mouseX > 200 && mouseY>50 && mouseY < 450){
+    movePro();
   }
-   
-  // if (keyIsPressed && key == )
+
   fill('green');
   textSize(20);
-  text("[T]: Look in reflection\n[R]: Change mode\n[S]:Open mirror\n[N]:Close mirror",60,410);
-  // triangle(mouseX,100,200,200,300,300
-  // zt();
-  
+  text("[T]: Observation mode(Look in reflection)\n[R]: Feed with infrared ray\n[S]: Open mirror\n[N]: Close mirror",60,410);
 }
 
-function backgroun(){
+function backgroun(){ //draw background
   background('#99DFFF');
   fill('#B5FF60');
   noStroke();
@@ -57,7 +51,7 @@ function backgroun(){
   ellipse(150,460,380,200);
 }
 
-function ak(akx,aky){
+function ak(akx,aky){ //draw infrared ray (food)
   push();
   frameRate(3);
   fill("rgba(255,0,0,0.15)");
@@ -80,18 +74,19 @@ function ak(akx,aky){
   pop();
 }
 
-function zz(){
+function movePro(){  //move the protein
   push();
-  frameRate(50);
+  translate(mouseX,mouseY);
+  frameRate(40);
   let spd = 2;
   fill(255,0+yl,0);
-  triangle(mouseX,mouseY, mouseX-30,mouseY-100, mouseX+30,mouseY-100);
-  triangle(mouseX,mouseY, mouseX-30,mouseY+100, mouseX+30,mouseY+100);
+  triangle(0,5, -30,-100, +30,-100);
+  triangle(0,-5, -30,+100, +30,+100);
   noFill(); stroke("yellow"); strokeWeight(5);
-  ellipse(mouseX,mouseY,h*2,h);
-  ellipse(mouseX,mouseY,h*4,h*2);
-  ellipse(mouseX,mouseY,h*8,h*4);//ji
-  ellipse(mouseX,mouseY,h*10,h*5);
+  ellipse(0,0,h*2,h);
+  ellipse(0,0,h*4,h*2);
+  ellipse(0,0,h*8,h*4);//ji
+  ellipse(0,0,h*10,h*5);
   
   if (h>100){h=0;}
   h+=spd;
@@ -99,15 +94,7 @@ function zz(){
   yl+=2;
 }
 
-function zt(){
-  push();
-  translate(mouseX,mouseY);
-  fill(0);
-  triangle(100,100,200,200,300,300);
-  pop();
-}
-
-function jing(){
+function jing(){ //mirror
   fill('rgb(211,175,255)')
   rect(390,y,20,500); //xy 
   if (y>1){y-=5;}
@@ -116,7 +103,5 @@ function jing(){
   arc(400,250,400,400,1.5*PI,1.5*PI+x);
   fill('rgb(194,175,255)');
   arc(400,250,400,400,0.5*PI,0.5*PI+x);
-  if (x<3.15){x+=0.02;}
-  
-  
+  if (x<3.15){x+=0.02;}   
 }

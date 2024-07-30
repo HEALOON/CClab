@@ -1,3 +1,8 @@
+// after push to github with github desktop
+// this project should be at:
+// https://healoon.github.io/CClab/z_object-dancers-template/
+
+
 let dancer;
 function setup() {  
   let canvas = createCanvas(windowWidth, windowHeight);
@@ -50,25 +55,22 @@ class SongDancer {
 
   }
   display() {
-
     push();
     noStroke();
     translate(this.x, this.y);
     rotate(radians(this.aangle));
     
-    fill(100,200,this.color);
-
-    circle(this.circen, 0, 100); //xyd
+    fill(250,50,250-this.color);
     triangle(0,0, this.armpt,100,  this.bi,50);
     triangle(0,0, this.armpt,-100, this.bi,-50);
+
+    fill(100,200,this.color);
+    circle(this.circen, 0, 100); //xyd 
     
-    // this.drawReferenceShapes();
+    this.drawReferenceShapes();
 
     pop();
   }
-
-
-
 
 
   drawReferenceShapes() {

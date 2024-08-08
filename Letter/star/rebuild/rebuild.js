@@ -69,14 +69,22 @@ function draw() {
         }
     }
     if (animals[0].x<1400&&
-        animals[1].x<1400&&
-        animals[2].x<1400&&
-        animals[3].x<1400&&
-        animals[4].x<1400&&
-        animals[5].x<1400&&
-        animals[6].x<1400&&
+        // animals[1].x<1400&&
+        // animals[2].x<1400&&
+        // animals[3].x<1400&&
+        // animals[4].x<1400&&
+        // animals[5].x<1400&&
+        // animals[6].x<1400&&
         animals[7].x<1400){
-            image(shanIMG,width/2,height/2)
+            fill(0);
+            rect(0,0,width*2,height*2);
+            fill("red");
+
+            textSize(400);
+            text("👁️",width/2,300 );
+            textSize(60);
+            text("On behalf of all humanity\nAre you sure you want to destroy Earth again?",
+                width/2-800,height/2 );
         }
     // text(mouseX + "," + mouseY, mouseX, mouseY);
 

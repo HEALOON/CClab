@@ -1,13 +1,15 @@
 let bianjieIMG;
 let heIMG; //
 let haiIMG;
-let IMG88,IMG100,chinaIMG,dongfmzIMG,hqjr,peace,wuk,zhongx;
+let IMG88,IMG100,chinaIMG,dongfmzIMG,hqjr,peace,wuk,zhongx,shanIMG;
 let animals = [];
 let numAnimals = 8;
 
 let buildinglist = []; //初始图片加载列表
 
+
 function preload() {
+    shanIMG = loadImage("shanpic.jpeg");
     bianjieIMG = loadImage("assets/bianjie.png");
     heIMG = loadImage("assets/he.png");//
     buildinglist.push(IMG100 = loadImage("assets/100.jpeg"));
@@ -74,11 +76,7 @@ function draw() {
         animals[5].x<1400&&
         animals[6].x<1400&&
         animals[7].x<1400){
-            fill("green");
-            rect(0,0,width*2,height*2);
-            fill("hotpink");
-            textSize(60);textAlign(CENTER);
-            text("Welcome Back to Home",width/2,height/2);
+            image(shanIMG,width/2,height/2)
         }
     // text(mouseX + "," + mouseY, mouseX, mouseY);
 

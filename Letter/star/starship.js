@@ -1,13 +1,18 @@
 let stars = [];
 let shipIMG, earthIMG;
 let myspaceship, myearth;
+let ambience;
+
+
 function preload(){
+    ambience = loadSound("yinx.mp3");
     shipIMG = loadImage('spacecraft.png');
     earthIMG = loadImage('earth.png');
 }
 function setup() {
     let cnv = createCanvas(windowWidth, windowHeight);
     cnv.parent("canvas-parent")    ;
+    
     imageMode(CENTER);
     rectMode(CENTER);
     for (let i = 0; i < 100; i++) {
@@ -155,4 +160,5 @@ function mousePressed() {
         mouseY >= height/2 -height/24 && mouseY <= height/2 +height/24) {
         window.location.href = 'rebuild/index.html';
     }
+    ambience.loop();
 }

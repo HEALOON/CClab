@@ -66,7 +66,21 @@ function draw() {
             showInfo(i);
         }
     }
-    text(mouseX + "," + mouseY, mouseX, mouseY);
+    if (animals[0].x<1400&&
+        animals[1].x<1400&&
+        animals[2].x<1400&&
+        animals[3].x<1400&&
+        animals[4].x<1400&&
+        animals[5].x<1400&&
+        animals[6].x<1400&&
+        animals[7].x<1400){
+            fill("green");
+            rect(0,0,width*2,height*2);
+            fill("hotpink");
+            textSize(60);textAlign(CENTER);
+            text("Welcome Back to Home",width/2,height/2);
+        }
+    // text(mouseX + "," + mouseY, mouseX, mouseY);
 
     // infom(){
         
@@ -108,8 +122,8 @@ class Animal {
             
             fill("red");
         } else { fill(255); }
-        rect(-100, -100, 200, 200);
-        text(this.photo.width,this.x,this.y);        
+        // rect(-100, -100, 200, 200);
+        // text(this.photo.width,this.x,this.y);        
 
         //       the img      x        y 
         //-imgW / 2,-imgH + 90
@@ -156,6 +170,7 @@ function groun() {//画陆地 + 河
 }
 
 function showInfo(i){
+
     if(i==1){
         text("‌Jinmao Tower, located at 88 Century Avenue, Pudong New Area \nShanghai, was the first skyscraper in China. It is also a shining pearl in \n‌ Lujiazui Financial and Trade Zone. With its unique design and function,\n the building has become one of the landmarks of Shanghai.\nHeight: 420.5 meters\nAppearance: The appearance of Jinmao Tower resembles a Chinese \npagoda, and the design inspiration comes from the shape of ancient \nChinese pagodas, reflecting the concept of traditional Chinese\nBuddhist culture.\nConstruction time: began in 1994 officially opened in 1999",1000,10);
     }else if(i==0){

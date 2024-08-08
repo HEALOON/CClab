@@ -153,6 +153,6 @@ function drawButton() {
 function mousePressed() {
     if (mouseX >= width/2 -width/16 && mouseX <= width/2 + width/16 && 
         mouseY >= height/2 -height/24 && mouseY <= height/2 +height/24) {
-        window.location.href = 'https://www.baidu.com';
+        window.location.href = 'rebuild/index.html';
     }
 }

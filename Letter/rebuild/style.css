@@ -1,0 +1,9 @@
+body{
+    background-image: url('assets/hai.jpg');
+    background-size:100%;
+    margin: 0;
+}
+h1{
+    text-align: center;
+    color: aliceblue;
+}

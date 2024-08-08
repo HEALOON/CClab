@@ -69,12 +69,12 @@ function draw() {
         }
     }
     if (animals[0].x<1400&&
-        // animals[1].x<1400&&
-        // animals[2].x<1400&&
-        // animals[3].x<1400&&
-        // animals[4].x<1400&&
-        // animals[5].x<1400&&
-        // animals[6].x<1400&&
+        animals[1].x<1400&&
+        animals[2].x<1400&&
+        animals[3].x<1400&&
+        animals[4].x<1400&&
+        animals[5].x<1400&&
+        animals[6].x<1400&&
         animals[7].x<1400){
             fill(0);
             rect(0,0,width*2,height*2);

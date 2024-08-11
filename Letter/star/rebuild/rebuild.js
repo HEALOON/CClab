@@ -1,18 +1,20 @@
 let bianjieIMG;
 let heIMG; //
 let haiIMG;
+let yao1IMG, yao2IMG; //上下两瓣
 let IMG88,IMG100,chinaIMG,dongfmzIMG,hqjr,peace,wuk,zhongx,shanIMG;
+let dingSOUND;
 let animals = [];
 let numAnimals = 8;
 
-let buildinglist = []; //初始图片加载列表
 
+let buildinglist = []; //初始图片加载列表
 
 function preload() {
     shanIMG = loadImage("shanpic.jpeg");
     bianjieIMG = loadImage("assets/bianjie.png");
     heIMG = loadImage("assets/he.png");//
-    buildinglist.push(IMG100 = loadImage("assets/100.jpeg"));
+    buildinglist.push(IMG100 = loadImage("assets/100.png"));
     buildinglist.push(IMG88 = loadImage("assets/88.png")); 
     
     buildinglist.push(chinaIMG = loadImage("assets/china.png"));
@@ -22,23 +24,25 @@ function preload() {
     buildinglist.push( peace = loadImage("assets/peace.png"));
     buildinglist.push(wuk = loadImage("assets/wuk.png"));
     buildinglist.push( zhongx = loadImage("assets/zhongx.png"));
-    buildinglist.push([0.2,0.1,     0.1,0.1,     0.1,0.1,   0.06,0.1,]);
+
+    buildinglist.push([0.2,0.1,     0.1,0.1,     0.1,0.1,   0.06,0.1,]);//scale
+    yao1IMG = loadImage("assets/yaoup.png");
+    yao2IMG = loadImage("assets/yaodown.png");
+
     haiIMG = loadImage("assets/hai.jpg");
+    dingSOUND = loadSound("assets/ding.m4a");
 }
 
 function setup() {
     let cnv = createCanvas(2000, 1100);
     cnv.parent("canvas-parent");
-    imageMode(CENTER);
+    imageMode(CENTER); 
     // noCursor();
 
-    // MAKE INITIAL COWS and put the into the animals array
-    let ranY = 50;
+    let ranY = 100;
     for (let i = 0; i < numAnimals; i++) {
-        let ranX = random(1450, width - 100);    
-        
-
-        let oneCow = new Animal(ranX, ranY, buildinglist[i], buildinglist[8][i]); //1
+        let ranX = random(1450, width - 100);
+        let oneCow = new Animal(ranX, ranY, buildinglist[i], yao1IMG,yao2IMG); //1
         animals.push(oneCow);
         ranY += 100;
     }
@@ -50,121 +54,69 @@ function draw() {
     image(haiIMG,width/2,height/2,2000,1100);
     fill(255);
     noStroke();
-    rect(0,0,620,height);
-    fill(0);
-    // stroke();
-    strokeWeight(5);
-    line(1400, 0, 1400, height); //xy xy
+    quad(0,0, 640,0, 570,height, 0,height);
     groun();
 
-    // DO STUFF FOR EACH COW --> loop over the animals array
     for (let i = 0; i < animals.length; i++) {
         animals[i].display();
         animals[i].update();
-        if (animals[i].isDragged == true){
-            fill(220,244,220);
-            rect(1000, 0, 400 ,150);
-            fill(0);
+        if (animals[i].isDragged == true){//介绍                     
             showInfo(i);
         }
     }
-    if (animals[0].x<1400&&
-        animals[1].x<1400&&
-        animals[2].x<1400&&
-        animals[3].x<1400&&
-        animals[4].x<1400&&
-        animals[5].x<1400&&
-        animals[6].x<1400&&
-        animals[7].x<1400){
-            fill(0);
-            rect(0,0,width*2,height*2);
-            fill("red");
-
-            textSize(400);
-            text("👁️",width/2,300 );
-            textSize(60);
-            text("On behalf of all humanity\nAre you sure you want to destroy Earth again?",
-                width/2-800,height/2 );
-        }
+    ending();
     // text(mouseX + "," + mouseY, mouseX, mouseY);
-
-    // infom(){
-        
-    // }
 }
 
 class Animal {
-    constructor(startX, startY, buildimg, myScale) {
+    constructor(startX, startY, buildimg, imgup,imgdown) {
         this.x = startX; this.y = startY;
         this.photo = buildimg;
-        // this.photoChic
-        this.scaleFactor = myScale;
 
-        this.xSpeed = 1;
-        this.ySpeed = 1;
-
-        // this.type = myType;
         this.isDragged = false;
+
+        this.yaoup = imgup;
+        this.yaodown = imgdown;
+        this.yaospeed = 0;        
     }
     update() {
-        if (this.isDragged == true) {//3
+        if (this.isDragged == true) {
             this.x = mouseX;
             this.y = mouseY;
-        }
-        
-
+            this.yaospeed += 45; 
+        }               
     }
     display() {
         push(); 
         translate(this.x, this.y); 
-        scale(this.scaleFactor);
-
-        // we reposition the img to 
-        // better fit this object's origin point (this.x, this.y)
-        let imgW = this.photo.width; let imgH = this.photo.height;
-
-        if (this.isDragged == true) {//2
-            fill(255);
-            
-            fill("red");
-        } else { fill(255); }
-        // rect(-100, -100, 200, 200);
-        // text(this.photo.width,this.x,this.y);        
-
-        //       the img      x        y 
-        //-imgW / 2,-imgH + 90
+        rectMode(CENTER);
+        let imgW = this.photo.width; let imgH = this.photo.height;          
+        //       the img  x  y   
         image(this.photo, 0, 0);
-
-        fill("blue");
-        circle(0, 0, 5);
-
+        image(this.yaoup,   0,(0-imgH/4-15)-this.yaospeed,  this.yaoup.width,imgH/2+30);
+        image(this.yaodown, 0,(0+imgH/4+15)+this.yaospeed,  this.yaoup.width,imgH/2+30);            
         pop();
     }
     
     checkIsPressed() {//2
-        fill("green");
-        rect(this.x-20,this.y-20,20,90);
-        if (mouseX > this.x - 20  &&
-            mouseX < this.x + 20  &&
-            mouseY > this.y - 20  &&
-            mouseY < this.y + 20) {
+        let imgW = this.photo.width; let imgH = this.photo.height;
+        if (mouseX > this.x - (imgW/2)  &&  mouseX < this.x + (imgW/2)  &&
+            mouseY > this.y - (imgH/2)  &&  mouseY < this.y + (imgH/2)) {
             this.isDragged = true;
+            dingSOUND.play();   
         }
     }
 }
 
-function mousePressed() {//mouse down function
-    
-    console.log("pre");
-    for (let i = 0; i < animals.length; i++) {
+function mousePressed() {
+    for (let i = animals.length-1; i >=0 ; i--) {
         animals[i].checkIsPressed();
-    }
+    }    
 }
 
-function mouseReleased() {//3
-    console.log("rel");
+function mouseReleased() {
     for (let i = 0; i < animals.length; i++) {
-        animals[i].isDragged = false;
+        animals[i].isDragged = false;        
     }
 }
 
@@ -176,7 +128,10 @@ function groun() {//画陆地 + 河
 }
 
 function showInfo(i){
-
+    fill(220,244,220);
+    rect(1000, 0, 400 ,150);
+    fill(0);
+    // textFont("ComicSans");
     if(i==1){
         text("‌Jinmao Tower, located at 88 Century Avenue, Pudong New Area \nShanghai, was the first skyscraper in China. It is also a shining pearl in \n‌ Lujiazui Financial and Trade Zone. With its unique design and function,\n the building has become one of the landmarks of Shanghai.\nHeight: 420.5 meters\nAppearance: The appearance of Jinmao Tower resembles a Chinese \npagoda, and the design inspiration comes from the shape of ancient \nChinese pagodas, reflecting the concept of traditional Chinese\nBuddhist culture.\nConstruction time: began in 1994 officially opened in 1999",1000,10);
     }else if(i==0){
@@ -193,6 +148,25 @@ function showInfo(i){
         text("WuKang Building, Formerly known as Normandy Apartments, located at \n1850 Huaihai Middle Road, Xuhui District, Shanghai, it is the first \noutdoor corridor style apartment building in Shanghai. The Wukang \nBuilding was first built in 1924, resembling a giant ship \nin appearance.",1000,20);
     }else if(i==7){
         text("Located in Lujiazui Finance and Trade Zone, Pudong New Area, \nShanghai center Building was started on November 29, 2008 and \ncompleted on March 12, 2016. It is known as a 'vertical city'. \nIts exterior design is inspired by the 'dragon shape', \nsymbolizing the rise of China's global financial power. \nThe building adopts a steel frame concrete core tube and an outer \nframe structure. As the height increases, each floor \nis twisted by nearly 1 degree. This asymmetric conical rounded shape \nreduces wind load by 24% and can withstand common typhoons.",1000,20);
-    }
-    
+    }    
+}
+function ending(){
+    if (animals[0].x<1400&& animals[0].isDragged == false   &&
+        animals[1].x<1400&& animals[1].isDragged == false   &&
+        animals[2].x<1400&& animals[2].isDragged == false   &&
+        animals[3].x<1400&& animals[3].isDragged == false   &&
+        animals[4].x<1400&& animals[4].isDragged == false   &&
+        animals[5].x<1400&& animals[5].isDragged == false   &&
+        animals[6].x<1400&& animals[6].isDragged == false   &&
+        animals[7].x<1400&& animals[7].isDragged == false){
+            fill(0);
+            rect(0,0,width*2,height*2);
+
+            fill("red");
+            textSize(400);
+            text("👁️",width/2,300 );
+            textSize(60);
+            text("On behalf of all humanity\nDo you sure you want to destroy Earth again?",
+                width/2-800,height/2 );
+        }
 }

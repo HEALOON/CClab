@@ -1,8 +1,6 @@
 body{
-    /* background-color: hotpink; */
     background-image: url('lettert.jpeg');
     background-size:100%;
-    /* background-position: center; */
 }
 
 .textbox{
@@ -10,11 +8,8 @@ body{
     left: 620px;
     top: 405px;
 
-   
-
-    margin: 10px;           /*pushing stuffs away*/
-    padding: 15px;  /*putting contents inner inside the box */
-
+    margin: 10px;          
+    padding: 15px;  
     width:630px;
     height: 700px;
 
@@ -28,9 +23,7 @@ body{
     position: absolute;
     left: 640px;
     top: 330px;
-
    
-
     margin: 10px;           /*pushing stuffs away*/
     padding: 15px;  /*putting contents inner inside the box */
 
@@ -40,4 +33,10 @@ body{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 20px;
     color: rgb(55, 42, 18);
+}
+.letterpicture{
+    position: absolute;
+    margin: 0px;  
+    left: 0px;
+    top: 0px;
 }

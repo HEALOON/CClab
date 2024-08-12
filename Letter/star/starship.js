@@ -96,8 +96,7 @@ class Spaceship{
         }
         if (keyIsDown(DOWN_ARROW)) {
             this.y += this.speed;
-        }
-        
+        }        
     
     }
     display(){
@@ -111,8 +110,7 @@ class Spaceship{
         if (this.x>50 && this.x<240 &&
             this.y>30 && this.y<255){
                 this.alive = false;
-            }
-        
+            }        
     }
 }
 
